@@ -20,41 +20,39 @@ public class ReservationModel implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "doctorId")
-    @JsonIgnoreProperties("reservationModels")
-    private DoctorModel doctorModel;
+    @JsonIgnoreProperties("reservations")
+    private DoctorModel doctor;
 
     @ManyToOne
     @JoinColumn(name = "clientId")
-    @JsonIgnoreProperties({"reservationModels", "messageModels"})
-    private ClientModel clientModel;
+    @JsonIgnoreProperties({"reservations", "messages"})
+    private ClientModel client;
 
 
-    @OneToOne
-    @JsonIgnoreProperties("reservationModel")
-    private ReserveQualificationModel reserveQualificationModel;
+    @OneToOne(mappedBy = "reservations")
+    @JsonIgnoreProperties("reservations")
+    private ReserveQualificationModel score;
 
     public ReservationModel() {
     }
 
-    public ReservationModel(Date startDate, Date devolutionDate, String status, DoctorModel doctorModel, ClientModel clientModel, ReserveQualificationModel reserveQualificationModel) {
-        this.startDate = startDate;
-        this.devolutionDate = devolutionDate;
-        this.status = status;
-        this.doctorModel = doctorModel;
-        this.clientModel = clientModel;
-        this.reserveQualificationModel = reserveQualificationModel;
-    }
-
-    public ReservationModel(Integer idReservation, Date startDate, Date devolutionDate, String status, DoctorModel doctorModel, ClientModel clientModel, ReserveQualificationModel reserveQualificationModel) {
+    public ReservationModel(Integer idReservation, Date startDate, Date devolutionDate, String status, DoctorModel doctor, ClientModel client, ReserveQualificationModel score) {
         this.idReservation = idReservation;
         this.startDate = startDate;
         this.devolutionDate = devolutionDate;
         this.status = status;
-        this.doctorModel = doctorModel;
-        this.clientModel = clientModel;
-        this.reserveQualificationModel = reserveQualificationModel;
+        this.doctor = doctor;
+        this.client = client;
+        this.score = score;
+    }
 
-
+    public ReservationModel(Date startDate, Date devolutionDate, String status, DoctorModel doctor, ClientModel client, ReserveQualificationModel score) {
+        this.startDate = startDate;
+        this.devolutionDate = devolutionDate;
+        this.status = status;
+        this.doctor = doctor;
+        this.client = client;
+        this.score = score;
     }
 
     public Integer getIdReservation() {
@@ -89,28 +87,28 @@ public class ReservationModel implements Serializable {
         this.status = status;
     }
 
-    public DoctorModel getDoctorModel() {
-        return doctorModel;
+    public DoctorModel getDoctor() {
+        return doctor;
     }
 
-    public void setDoctorModel(DoctorModel doctorModel) {
-        this.doctorModel = doctorModel;
+    public void setDoctor(DoctorModel doctor) {
+        this.doctor = doctor;
     }
 
-    public ClientModel getClientModel() {
-        return clientModel;
+    public ClientModel getClient() {
+        return client;
     }
 
-    public void setClientModel(ClientModel clientModel) {
-        this.clientModel = clientModel;
+    public void setClient(ClientModel client) {
+        this.client = client;
     }
 
-    public ReserveQualificationModel getReserveQualificationModel() {
-        return reserveQualificationModel;
+    public ReserveQualificationModel getScore() {
+        return score;
     }
 
-    public void setReserveQualificationModel(ReserveQualificationModel reserveQualificationModel) {
-        this.reserveQualificationModel = reserveQualificationModel;
+    public void setScore(ReserveQualificationModel score) {
+        this.score = score;
     }
 
     @Override
@@ -120,9 +118,9 @@ public class ReservationModel implements Serializable {
                 ", startDate=" + startDate +
                 ", devolutionDate=" + devolutionDate +
                 ", status='" + status + '\'' +
-                ", doctorModel=" + doctorModel +
-                ", clientModel=" + clientModel +
-                ", reserveQualificationModel=" + reserveQualificationModel +
+                ", doctor=" + doctor +
+                ", client=" + client +
+                ", score=" + score +
                 '}';
     }
 }

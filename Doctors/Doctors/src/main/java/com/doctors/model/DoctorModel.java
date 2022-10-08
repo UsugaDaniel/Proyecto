@@ -18,7 +18,7 @@ public class DoctorModel implements Serializable
     private String email;
     private Integer age;
 
-    private String specialty;
+    //private String specialty;
 
     private Integer year;
 
@@ -29,17 +29,16 @@ public class DoctorModel implements Serializable
 
     @ManyToOne
     @JoinColumn(name = "specialtyId")
-    @JsonIgnoreProperties("doctorModels")
-    private SpecialtyModel specialtyModel;
-
-    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy="doctor")
-    @JsonIgnoreProperties({"doctor", "messageModels"})
-    public List<ReservationModel> reservationModels;
+    @JsonIgnoreProperties("doctors")
+    private SpecialtyModel specialty;
 
     @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy="doctor")
     @JsonIgnoreProperties({"doctor", "client"})
-    public List<MessageModel> messageModels;
+    public List<ReservationModel> reservations;
 
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy="doctor")
+    @JsonIgnoreProperties({"doctor", "client"})
+    public List<MessageModel> messages;
 
 
 
@@ -48,31 +47,25 @@ public class DoctorModel implements Serializable
 
     }
 
-    public DoctorModel(Integer id, String name, String email, Integer age, String specialty, Integer year, String description, String department, SpecialtyModel specialtyModel, List<ReservationModel> reservationModels, List<MessageModel> messageModels) {
+    public DoctorModel(Integer id, String name, String email, Integer age, Integer year, String description, String department, SpecialtyModel specialty) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.age = age;
-        this.specialty = specialty;
         this.year = year;
         this.description = description;
         this.department = department;
-        this.specialtyModel = specialtyModel;
-        this.reservationModels = reservationModels;
-        this.messageModels = messageModels;
+        this.specialty = specialty;
     }
 
-    public DoctorModel(String name, String email, Integer age, String specialty, Integer year, String description, String department, SpecialtyModel specialtyModel, List<ReservationModel> reservationModels, List<MessageModel> messageModels) {
+    public DoctorModel(String name, String email, Integer age, Integer year, String description, String department, SpecialtyModel specialty) {
         this.name = name;
         this.email = email;
         this.age = age;
-        this.specialty = specialty;
         this.year = year;
         this.description = description;
         this.department = department;
-        this.specialtyModel = specialtyModel;
-        this.reservationModels = reservationModels;
-        this.messageModels = messageModels;
+        this.specialty = specialty;
     }
 
     public Integer getId() {
@@ -107,14 +100,6 @@ public class DoctorModel implements Serializable
         this.age = age;
     }
 
-    public String getSpecialty() {
-        return specialty;
-    }
-
-    public void setSpecialty(String specialty) {
-        this.specialty = specialty;
-    }
-
     public Integer getYear() {
         return year;
     }
@@ -139,28 +124,12 @@ public class DoctorModel implements Serializable
         this.department = department;
     }
 
-    public SpecialtyModel getSpecialtyModel() {
-        return specialtyModel;
+    public SpecialtyModel getSpecialty() {
+        return specialty;
     }
 
-    public void setSpecialtyModel(SpecialtyModel specialtyModel) {
-        this.specialtyModel = specialtyModel;
-    }
-
-    public List<ReservationModel> getReservationModels() {
-        return reservationModels;
-    }
-
-    public void setReservationModels(List<ReservationModel> reservationModels) {
-        this.reservationModels = reservationModels;
-    }
-
-    public List<MessageModel> getMessageModels() {
-        return messageModels;
-    }
-
-    public void setMessageModels(List<MessageModel> messageModels) {
-        this.messageModels = messageModels;
+    public void setSpecialty(SpecialtyModel specialty) {
+        this.specialty = specialty;
     }
 
     @Override
@@ -170,13 +139,12 @@ public class DoctorModel implements Serializable
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", age=" + age +
-                ", specialty='" + specialty + '\'' +
                 ", year=" + year +
                 ", description='" + description + '\'' +
                 ", department='" + department + '\'' +
-                ", specialtyModel=" + specialtyModel +
-                ", reservationModels=" + reservationModels +
-                ", messageModels=" + messageModels +
+                ", specialty=" + specialty +
+                ", reservations=" + reservations +
+                ", messages=" + messages +
                 '}';
     }
 }

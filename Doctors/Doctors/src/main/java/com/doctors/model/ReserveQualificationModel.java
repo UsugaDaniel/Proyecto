@@ -25,27 +25,27 @@ public class ReserveQualificationModel implements Serializable {
 
     @OneToOne
     @JsonIgnoreProperties("reserveQualificationModel")
-    private ReservationModel reservationModel;
+    private ReservationModel reservations;
     public ReserveQualificationModel() {
     }
 
-    public ReserveQualificationModel(Integer idScore, String name, String email, Integer age, String messageText, Integer stars, ReservationModel reservationModel) {
+    public ReserveQualificationModel(Integer idScore, String name, String email, Integer age, String messageText, Integer stars, ReservationModel reservations) {
         this.idScore = idScore;
         this.name = name;
         this.email = email;
         this.age = age;
         this.messageText = messageText;
         this.stars = stars;
-        this.reservationModel = reservationModel;
+        this.reservations = reservations;
     }
 
-    public ReserveQualificationModel(String name, String email, Integer age, String messageText, Integer stars, ReservationModel reservationModel) {
+    public ReserveQualificationModel(String name, String email, Integer age, String messageText, Integer stars, ReservationModel reservations) {
         this.name = name;
         this.email = email;
         this.age = age;
         this.messageText = messageText;
         this.stars = stars;
-        this.reservationModel = reservationModel;
+        this.reservations = reservations;
     }
 
     public Integer getIdScore() {
@@ -96,12 +96,12 @@ public class ReserveQualificationModel implements Serializable {
         this.stars = stars;
     }
 
-    public ReservationModel getReservationModel() {
-        return reservationModel;
+    public ReservationModel getReservations() {
+        return reservations;
     }
 
-    public void setReservationModel(ReservationModel reservationModel) {
-        this.reservationModel = reservationModel;
+    public void setReservations(ReservationModel reservations) {
+        this.reservations = reservations;
     }
 
     @Override
@@ -113,7 +113,7 @@ public class ReserveQualificationModel implements Serializable {
                 ", age=" + age +
                 ", messageText='" + messageText + '\'' +
                 ", stars=" + stars +
-                ", reservationModel=" + reservationModel +
+                ", reservations=" + reservations +
                 '}';
     }
 }

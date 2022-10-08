@@ -25,25 +25,25 @@ import java.util.List;
 
 
     @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "specialty")
-    @JsonIgnoreProperties("specialtyModel")
-    private List<DoctorModel> doctorModels;
+    @JsonIgnoreProperties("specialty")
+    private List<DoctorModel> doctors;
 
 
 
     public SpecialtyModel() {
     }
 
-     public SpecialtyModel(String name, String description, List<DoctorModel> doctorModels) {
-         this.name = name;
-         this.description = description;
-         this.doctorModels = doctorModels;
-     }
-
-     public SpecialtyModel(Integer id, String name, String description, List<DoctorModel> doctorModels) {
+     public SpecialtyModel(Integer id, String name, String description, List<DoctorModel> doctors) {
          this.id = id;
          this.name = name;
          this.description = description;
-         this.doctorModels = doctorModels;
+         this.doctors = doctors;
+     }
+
+     public SpecialtyModel(String name, String description, List<DoctorModel> doctors) {
+         this.name = name;
+         this.description = description;
+         this.doctors = doctors;
      }
 
      public Integer getId() {
@@ -70,12 +70,12 @@ import java.util.List;
          this.description = description;
      }
 
-     public List<DoctorModel> getDoctorModels() {
-         return doctorModels;
+     public List<DoctorModel> getDoctors() {
+         return doctors;
      }
 
-     public void setDoctorModels(List<DoctorModel> doctorModels) {
-         this.doctorModels = doctorModels;
+     public void setDoctors(List<DoctorModel> doctors) {
+         this.doctors = doctors;
      }
 
      @Override
@@ -84,7 +84,7 @@ import java.util.List;
                  "id=" + id +
                  ", name='" + name + '\'' +
                  ", description='" + description + '\'' +
-                 ", doctorModels=" + doctorModels +
+                 ", doctors=" + doctors +
                  '}';
      }
  }

@@ -17,28 +17,28 @@ public class MessageModel implements Serializable
 
     @ManyToOne
     @JoinColumn(name = "doctorId")
-    @JsonIgnoreProperties({"messagesModels", "reservationModels" })
-    private DoctorModel doctorModel;
+    @JsonIgnoreProperties({"messages", "reservations" })
+    private DoctorModel doctor;
 
     @ManyToOne
     @JoinColumn(name = "clientId")
-    @JsonIgnoreProperties({"messageModels", "reservationModels" })
-    private ClientModel clientModel;
+    @JsonIgnoreProperties({"messages", "reservations" })
+    private ClientModel client;
 
     public MessageModel() {
     }
 
-    public MessageModel(Integer idMessage, String messageText, DoctorModel doctorModel, ClientModel clientModel) {
+    public MessageModel(Integer idMessage, String messageText, DoctorModel doctor, ClientModel client) {
         this.idMessage = idMessage;
         this.messageText = messageText;
-        this.doctorModel = doctorModel;
-        this.clientModel = clientModel;
+        this.doctor = doctor;
+        this.client = client;
     }
 
-    public MessageModel(String messageText, DoctorModel doctorModel, ClientModel clientModel) {
+    public MessageModel(String messageText, DoctorModel doctor, ClientModel client) {
         this.messageText = messageText;
-        this.doctorModel = doctorModel;
-        this.clientModel = clientModel;
+        this.doctor = doctor;
+        this.client = client;
     }
 
     public Integer getIdMessage() {
@@ -57,20 +57,20 @@ public class MessageModel implements Serializable
         this.messageText = messageText;
     }
 
-    public DoctorModel getDoctorModel() {
-        return doctorModel;
+    public DoctorModel getDoctor() {
+        return doctor;
     }
 
-    public void setDoctorModel(DoctorModel doctorModel) {
-        this.doctorModel = doctorModel;
+    public void setDoctor(DoctorModel doctor) {
+        this.doctor = doctor;
     }
 
-    public ClientModel getClientModel() {
-        return clientModel;
+    public ClientModel getClient() {
+        return client;
     }
 
-    public void setClientModel(ClientModel clientModel) {
-        this.clientModel = clientModel;
+    public void setClient(ClientModel client) {
+        this.client = client;
     }
 
     @Override
@@ -78,8 +78,8 @@ public class MessageModel implements Serializable
         return "MessageModel{" +
                 "idMessage=" + idMessage +
                 ", messageText='" + messageText + '\'' +
-                ", doctorModel=" + doctorModel +
-                ", clientModel=" + clientModel +
+                ", doctor=" + doctor +
+                ", client=" + client +
                 '}';
     }
 }

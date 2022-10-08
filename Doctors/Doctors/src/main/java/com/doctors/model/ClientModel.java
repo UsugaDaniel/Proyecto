@@ -22,11 +22,11 @@ public class ClientModel implements Serializable
 
     @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "client")
     @JsonIgnoreProperties("client")
-    public List<ReservationModel> reservationModels;
+    public List<ReservationModel> reservations;
 
     @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "client")
     @JsonIgnoreProperties("client")
-    public List<MessageModel> messageModels;
+    public List<MessageModel> messages;
 
 
 
@@ -36,23 +36,19 @@ public class ClientModel implements Serializable
 
     }
 
-    public ClientModel(Integer idClient, String name, String email, Integer age, String password, List<ReservationModel> reservationModels, List<MessageModel> messageModels) {
+    public ClientModel(Integer idClient, String name, String email, Integer age, String password) {
         this.idClient = idClient;
         this.name = name;
         this.email = email;
         this.age = age;
         this.password = password;
-        this.reservationModels = reservationModels;
-        this.messageModels = messageModels;
     }
 
-    public ClientModel(String name, String email, Integer age, String password, List<ReservationModel> reservationModels, List<MessageModel> messageModels) {
+    public ClientModel(String name, String email, Integer age, String password) {
         this.name = name;
         this.email = email;
         this.age = age;
         this.password = password;
-        this.reservationModels = reservationModels;
-        this.messageModels = messageModels;
     }
 
     public Integer getIdClient() {
@@ -95,22 +91,6 @@ public class ClientModel implements Serializable
         this.password = password;
     }
 
-    public List<ReservationModel> getReservationModels() {
-        return reservationModels;
-    }
-
-    public void setReservationModels(List<ReservationModel> reservationModels) {
-        this.reservationModels = reservationModels;
-    }
-
-    public List<MessageModel> getMessageModels() {
-        return messageModels;
-    }
-
-    public void setMessageModels(List<MessageModel> messageModels) {
-        this.messageModels = messageModels;
-    }
-
     @Override
     public String toString() {
         return "ClientModel{" +
@@ -119,8 +99,8 @@ public class ClientModel implements Serializable
                 ", email='" + email + '\'' +
                 ", age=" + age +
                 ", password='" + password + '\'' +
-                ", reservationModels=" + reservationModels +
-                ", messageModels=" + messageModels +
+                ", reservations=" + reservations +
+                ", messages=" + messages +
                 '}';
     }
 }
