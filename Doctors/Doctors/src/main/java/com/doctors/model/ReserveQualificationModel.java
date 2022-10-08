@@ -1,5 +1,7 @@
 package com.doctors.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -11,34 +13,47 @@ public class ReserveQualificationModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private Integer id;
+    private Integer idScore;
     private String name;
     private String email;
     private Integer age;
 
+    private String messageText;
 
+    private Integer stars;
+
+
+    @OneToOne
+    @JsonIgnoreProperties("reserveQualificationModel")
+    private ReservationModel reservationModel;
     public ReserveQualificationModel() {
     }
 
-    public ReserveQualificationModel(String name, String email, Integer age) {
+    public ReserveQualificationModel(Integer idScore, String name, String email, Integer age, String messageText, Integer stars, ReservationModel reservationModel) {
+        this.idScore = idScore;
         this.name = name;
         this.email = email;
         this.age = age;
+        this.messageText = messageText;
+        this.stars = stars;
+        this.reservationModel = reservationModel;
     }
 
-    public ReserveQualificationModel(Integer id, String name, String email, Integer age) {
-        this.id = id;
+    public ReserveQualificationModel(String name, String email, Integer age, String messageText, Integer stars, ReservationModel reservationModel) {
         this.name = name;
         this.email = email;
         this.age = age;
+        this.messageText = messageText;
+        this.stars = stars;
+        this.reservationModel = reservationModel;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdScore() {
+        return idScore;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdScore(Integer idScore) {
+        this.idScore = idScore;
     }
 
     public String getName() {
@@ -65,13 +80,40 @@ public class ReserveQualificationModel implements Serializable {
         this.age = age;
     }
 
+    public String getMessageText() {
+        return messageText;
+    }
+
+    public void setMessageText(String messageText) {
+        this.messageText = messageText;
+    }
+
+    public Integer getStars() {
+        return stars;
+    }
+
+    public void setStars(Integer stars) {
+        this.stars = stars;
+    }
+
+    public ReservationModel getReservationModel() {
+        return reservationModel;
+    }
+
+    public void setReservationModel(ReservationModel reservationModel) {
+        this.reservationModel = reservationModel;
+    }
+
     @Override
     public String toString() {
         return "ReserveQualificationModel{" +
-                "id=" + id +
+                "idScore=" + idScore +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", age=" + age +
+                ", messageText='" + messageText + '\'' +
+                ", stars=" + stars +
+                ", reservationModel=" + reservationModel +
                 '}';
     }
 }

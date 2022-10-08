@@ -11,12 +11,19 @@ public class AdminUsersModel implements Serializable
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idAdmin;
     private String name;
     private String email;
     private String password;
 
-    public AdminUsersModel(){
+    public AdminUsersModel() {
+    }
+
+    public AdminUsersModel(Integer idAdmin, String name, String email, String password) {
+        this.idAdmin = idAdmin;
+        this.name = name;
+        this.email = email;
+        this.password = password;
     }
 
     public AdminUsersModel(String name, String email, String password) {
@@ -25,19 +32,12 @@ public class AdminUsersModel implements Serializable
         this.password = password;
     }
 
-    public AdminUsersModel(Integer id, String name, String email, String password) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
+    public Integer getIdAdmin() {
+        return idAdmin;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdAdmin(Integer idAdmin) {
+        this.idAdmin = idAdmin;
     }
 
     public String getName() {
@@ -67,14 +67,10 @@ public class AdminUsersModel implements Serializable
     @Override
     public String toString() {
         return "AdminUsersModel{" +
-                "id=" + id +
+                "idAdmin=" + idAdmin +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", password=" + password +
+                ", password='" + password + '\'' +
                 '}';
     }
-
-
-
-
 }
