@@ -1,7 +1,10 @@
 package com.doctors.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "client")
@@ -9,35 +12,51 @@ public class ClientModel implements Serializable
 {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idClient;
     private String name;
     private String email;
     private Integer age;
+
+    private String password;
+
+
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "client")
+    @JsonIgnoreProperties("client")
+    public List<ReservationModel> reservations;
+
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "client")
+    @JsonIgnoreProperties("client")
+    public List<MessageModel> messages;
+
+
+
 
     public ClientModel()
     {
 
     }
 
-    public ClientModel(String name, String email, Integer age) {
+    public ClientModel(Integer idClient, String name, String email, Integer age, String password) {
+        this.idClient = idClient;
         this.name = name;
         this.email = email;
         this.age = age;
+        this.password = password;
     }
 
-    public ClientModel(Integer id, String name, String email, Integer age) {
-        this.id = id;
+    public ClientModel(String name, String email, Integer age, String password) {
         this.name = name;
         this.email = email;
         this.age = age;
+        this.password = password;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdClient() {
+        return idClient;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdClient(Integer idClient) {
+        this.idClient = idClient;
     }
 
     public String getName() {
@@ -64,13 +83,24 @@ public class ClientModel implements Serializable
         this.age = age;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "ClientModel{" +
-                "id=" + id +
+                "idClient=" + idClient +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", age=" + age +
+                ", password='" + password + '\'' +
+                ", reservations=" + reservations +
+                ", messages=" + messages +
                 '}';
     }
 }

@@ -1,5 +1,7 @@
 package com.doctors.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -15,20 +17,42 @@ public class ReservationModel implements Serializable {
     private Date devolutionDate;
     private String status = "created";
 
+
+    @ManyToOne
+    @JoinColumn(name = "doctorId")
+    @JsonIgnoreProperties("reservations")
+    private DoctorModel doctor;
+
+    @ManyToOne
+    @JoinColumn(name = "clientId")
+    @JsonIgnoreProperties({"reservations", "messages"})
+    private ClientModel client;
+
+
+    @OneToOne(mappedBy = "reservations")
+    @JsonIgnoreProperties("reservations")
+    private ReserveQualificationModel score;
+
     public ReservationModel() {
     }
 
-    public ReservationModel(Date startDate, Date devolutionDate, String status) {
-        this.startDate = startDate;
-        this.devolutionDate = devolutionDate;
-        this.status = status;
-    }
-
-    public ReservationModel(Integer idReservation, Date startDate, Date devolutionDate, String status) {
+    public ReservationModel(Integer idReservation, Date startDate, Date devolutionDate, String status, DoctorModel doctor, ClientModel client, ReserveQualificationModel score) {
         this.idReservation = idReservation;
         this.startDate = startDate;
         this.devolutionDate = devolutionDate;
         this.status = status;
+        this.doctor = doctor;
+        this.client = client;
+        this.score = score;
+    }
+
+    public ReservationModel(Date startDate, Date devolutionDate, String status, DoctorModel doctor, ClientModel client, ReserveQualificationModel score) {
+        this.startDate = startDate;
+        this.devolutionDate = devolutionDate;
+        this.status = status;
+        this.doctor = doctor;
+        this.client = client;
+        this.score = score;
     }
 
     public Integer getIdReservation() {
@@ -63,13 +87,40 @@ public class ReservationModel implements Serializable {
         this.status = status;
     }
 
+    public DoctorModel getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(DoctorModel doctor) {
+        this.doctor = doctor;
+    }
+
+    public ClientModel getClient() {
+        return client;
+    }
+
+    public void setClient(ClientModel client) {
+        this.client = client;
+    }
+
+    public ReserveQualificationModel getScore() {
+        return score;
+    }
+
+    public void setScore(ReserveQualificationModel score) {
+        this.score = score;
+    }
+
     @Override
     public String toString() {
-        return "RepositoryModel{" +
+        return "ReservationModel{" +
                 "idReservation=" + idReservation +
                 ", startDate=" + startDate +
                 ", devolutionDate=" + devolutionDate +
                 ", status='" + status + '\'' +
+                ", doctor=" + doctor +
+                ", client=" + client +
+                ", score=" + score +
                 '}';
     }
 }
